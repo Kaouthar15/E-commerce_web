@@ -16,20 +16,15 @@ public class ConnexionDB {
     static {
     	try {
     		Class.forName("com.mysql.cj.jdbc.Driver");
-    		connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/catalogue", "root", "123456"); 
+    		connexion = DriverManager.getConnection("jdbc:mysql://localhost/catalogue", "root", "123456"); 
     	}catch (SQLException ex) {
-            System.err.println("Not found or Incorrect Request");
+            System.err.println("Server/DB Not found or Incorrect Request");
         } catch (ClassNotFoundException e) {
+        	 System.err.println("Driver Not found or Incorrect Request");
 			e.printStackTrace();
 		}
     }
-    public static Connection Connect() {
+    public static  Connection Connect() { 
     	return connexion; 
     }
-
-
-
-    
-
-
 }

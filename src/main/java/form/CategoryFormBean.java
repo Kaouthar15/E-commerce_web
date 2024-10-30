@@ -1,8 +1,12 @@
 package form;
 
+import java.util.List;
+
+import model.Category;
+
 public class CategoryFormBean {
 
-	private Long id;
+	private Long id; 
 	private String name;
 	private String description;
 
@@ -13,8 +17,8 @@ public class CategoryFormBean {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setId(Long list) {
+		this.id = list;
 	}
 
 	public String getName() {

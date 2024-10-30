@@ -22,9 +22,11 @@ public class CategoryRepository {
         List<Category> categories = new ArrayList<>();
         String query = "SELECT * FROM categories";
 
-        try (Connection conx = connexionDB.Connect();
+        try{
+        	Connection conx = connexionDB.Connect();
+        
              Statement stmt = conx.createStatement(); 
-             ResultSet rs = stmt.executeQuery(query)) {
+             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
                 Category category = new Category();
@@ -34,17 +36,33 @@ public class CategoryRepository {
                 categories.add(category);
             }
         } catch (SQLException e) {
+        	System.out.println("Error in findAllCategories\n"+e);
             e.printStackTrace();
         }
+        System.out.println("Size of categories : "+categories.size());
         return categories;
     }
 
+    public void addCategory(String name, String description) {
+		String query="INSERT INTO categories(name,description) VALUES(?,?)";
+		try {
+			Connection conx = connexionDB.Connect(); 
+			PreparedStatement ps=conx.prepareStatement(query);
+			ps.setString(1,name);
+			ps.setString(2, description); 
+			ps.executeUpdate();
+			System.out.println("ADD CATEGORY"); 
+		}catch (SQLException e) {
+			System.out.println("Add Categorie ERROR ------>: \n"+e);
+		}
+	}
     public List<Category> searchByName(String name) {
         List<Category> categories = new ArrayList<>();
-        String query = "SELECT * FROM Category WHERE name LIKE ?";
+        String query = "SELECT * FROM Categories WHERE name LIKE ?";
 
-        try (Connection conn = connexionDB.Connect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try {
+        	Connection conx = connexionDB.Connect();
+             PreparedStatement stmt = conx.prepareStatement(query);
 
             stmt.setString(1, "%" + name + "%");
             ResultSet rs = stmt.executeQuery();
@@ -62,11 +80,10 @@ public class CategoryRepository {
     }
 
     public void save(Category category) {
-        String query = "INSERT INTO Category (name) VALUES (?)";
+        String query = "INSERT INTO Categories (name) VALUES (?)";
 
-        try (Connection conn = connexionDB.Connect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
+        try {Connection conn = connexionDB.Connect();
+             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, category.getName());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -75,13 +92,15 @@ public class CategoryRepository {
     }
 
     public void deleteById(Long id) {
-        String query = "DELETE FROM Category WHERE id = ?";
+        String query = "DELETE FROM Categories WHERE id = ?";
 
-        try (Connection conn = connexionDB.Connect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
+        try {
+        	Connection conn = connexionDB.Connect();
+             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setLong(1, id);
             stmt.executeUpdate();
+            System.out.println("DELETE CATEGORY");
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
