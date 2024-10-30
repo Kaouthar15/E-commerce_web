@@ -60,7 +60,7 @@ public class CategoryController extends HttpServlet {
 			cfb.setName(request.getParameter("name")); 
 		    List<Category> searchResults = categoryRepository.searchByName(cfb.getName());
 		    request.getSession().setAttribute("categories", searchResults);
-		    response.sendRedirect("categories"); 
+		    request.getRequestDispatcher("Category.jsp").forward(request, response);
 			System.out.println("Search");
 			System.out.println("Search using : " +request.getParameter("name"));
 		}

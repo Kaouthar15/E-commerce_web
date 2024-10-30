@@ -34,7 +34,7 @@
 <body>
     <h2 style="text-align: center;">Categories List</h2>
     <hr />
-
+	<%List<Category> categories = (List<Category>) session.getAttribute("categories"); %>
     <!-- Search Form -->
     <div class="search">
         <form method="post" action="categories">
@@ -54,6 +54,7 @@
             </tr>
         </thead>
         <tbody>
+        
             <!-- Add New Category Form -->
             <form method="post" action="categories">
                 <tr>
@@ -66,7 +67,7 @@
 
             <% 
                 // Fetch categories from session
-                List<Category> categories = (List<Category>) session.getAttribute("categories");
+                
                 if (categories != null && !categories.isEmpty()) {
                     for (Category category : categories) {
             %>

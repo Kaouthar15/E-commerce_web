@@ -66,13 +66,15 @@ public class CategoryRepository {
 
             stmt.setString(1, "%" + name + "%");
             ResultSet rs = stmt.executeQuery();
-
+            System.out.println("before");
             while (rs.next()) {
                 Category category = new Category();
                 category.setId(rs.getLong("id"));
                 category.setName(rs.getString("name"));
                 categories.add(category);
+                System.out.println("after "+category.getName()); 
             }
+           
         } catch (SQLException e) {
             e.printStackTrace();
         }
