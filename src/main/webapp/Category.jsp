@@ -3,38 +3,106 @@
 <%@page import="java.util.List"%>
 <%@page import="form.CategoryFormBean"%>
 
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Categories</title>
     <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px auto;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
         }
         
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        h2 {
             text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
         
-        th {
-            background-color: #f2f2f2;
+        hr {
+            border: 1px solid #ccc;
+            margin: 20px auto;
+            width: 80%;
         }
         
-        div {
+        .search, .add-category {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
         }
+        
+        .search input[type="text"], .add-category input[type="text"] {
+            padding: 8px;
+            margin-right: 10px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .search input[type="submit"], .add-category input[type="submit"] {
+            padding: 8px 12px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .search input[type="submit"]:hover, .add-category input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            color: #fff;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Categories List</h2>
+    <h2>Categories List</h2>
     <hr />
-	<%List<Category> categories = (List<Category>) session.getAttribute("categories"); %>
+    
     <!-- Search Form -->
     <div class="search">
         <form method="post" action="categories">
@@ -54,9 +122,8 @@
             </tr>
         </thead>
         <tbody>
-        
             <!-- Add New Category Form -->
-            <form method="post" action="categories">
+            <form method="post" action="categories" class="add-category">
                 <tr>
                     <td></td>
                     <td><input type="text" name="name" required placeholder="Category name" /></td>
@@ -67,7 +134,7 @@
 
             <% 
                 // Fetch categories from session
-                
+                List<Category> categories = (List<Category>) session.getAttribute("categories");
                 if (categories != null && !categories.isEmpty()) {
                     for (Category category : categories) {
             %>
@@ -78,7 +145,7 @@
                     <td>
                         <form method="post" action="categories" style="display:inline;">
                             <input type="hidden" name="id" value="<%= category.getId() %>" />
-                            <input type="submit" value="Delete" name="delete" />
+                            <input type="submit" class="action-btn" value="Delete" name="delete" />
                         </form>
                     </td>
                 </tr>

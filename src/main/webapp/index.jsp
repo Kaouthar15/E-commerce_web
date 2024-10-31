@@ -41,7 +41,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Hello World!</h1>
+        <h1>E-commerce Web Application</h1>
         <div class="nav-links">
             <a href="categories">Categories</a>
             <a href="products">Products</a>

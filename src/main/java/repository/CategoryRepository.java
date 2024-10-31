@@ -70,6 +70,7 @@ public class CategoryRepository {
                 Category category = new Category();
                 category.setId(rs.getLong("id"));
                 category.setName(rs.getString("name"));
+                category.setDescription(rs.getString("description"));
                 categories.add(category);
                 System.out.println("after "+category.getName()); 
             }

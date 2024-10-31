@@ -3,38 +3,114 @@
 <%@page import="java.util.List"%>
 <%@page import="form.CategoryFormBean"%>
 
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Categories</title>
+    <meta charset="UTF-8">
+    <title>Products</title>
     <style>
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px auto;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
         }
         
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        h2 {
             text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
         
-        th {
-            background-color: #f2f2f2;
+        hr {
+            border: 1px solid #ccc;
+            margin: 20px auto;
+            width: 80%;
         }
         
-        div {
+        .search, .add-product {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
         }
+        
+        .search input[type="text"], .add-product input[type="text"], .add-product input[type="file"] {
+            padding: 8px;
+            margin-right: 10px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .search input[type="submit"], .add-product input[type="submit"] {
+            padding: 8px 12px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .search input[type="submit"]:hover, .add-product input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            color: #fff;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+       .add {
+        	background-color: #008000;
+        }
+        .action-btn:hover {
+            background-color: #c82333;
+        }
+        
+        img {
+            width: 50px;
+            height: auto;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Products List</h2>
+    <h2>Products List</h2>
     <hr />
-	<%List<Product> products = (List<Product>) session.getAttribute("products"); %>
+    
     <!-- Search Form -->
     <div class="search">
         <form method="post" action="products">
@@ -43,7 +119,7 @@
         </form>
     </div>
 
-    <!-- Categories Table -->
+    <!-- Products Table -->
     <table>
         <thead>
             <tr>
@@ -55,33 +131,32 @@
             </tr>
         </thead>
         <tbody>
-        
-            <!-- Add New Category Form -->
-            <form method="post" action="products">
+            <!-- Add New Product Form -->
+            <form method="post" action="products" class="add-product" enctype="multipart/form-data">
                 <tr>
                     <td></td>
                     <td><input type="text" name="name" required placeholder="Product name" /></td>
-                    <td><input type="text" name="price" required placeholder="Product Price" /></td>
-                    <td><input type="file" name="photo" required  /></td>
-                    <td><input type="submit" value="Add" name="add" /></td>
+                    <td><input type="text" name="price" required placeholder="Product price" /></td>
+                    <td><input type="file" name="photo" required /></td>
+                    <td><input type="submit" class="action-btn add" value="Add" name="add" /></td>
                 </tr>
             </form>
 
             <% 
-                // Fetch categories from session
-                
+                // Fetch products from session
+                List<Product> products = (List<Product>) session.getAttribute("products");
                 if (products != null && !products.isEmpty()) {
                     for (Product product : products) {
             %>
                 <tr>
                     <td><%= product.getId() %></td>
                     <td><%= product.getName() %></td>
-                    <td><%= product.getPrice() %></td>
-                    <td><img src="<%= product.getPhoto()%>"/> 
+                    <td>$<%= product.getPrice() %></td>
+                    <td><img src="<%= product.getPhoto() %>" alt="Product Image" /></td>
                     <td>
                         <form method="post" action="products" style="display:inline;">
                             <input type="hidden" name="id" value="<%= product.getId() %>" />
-                            <input type="submit" value="Delete" name="delete" />
+                            <input type="submit" class="action-btn" value="Delete" name="delete" />
                         </form>
                     </td>
                 </tr>
@@ -90,7 +165,7 @@
                 } else {
             %>
                 <tr>
-                    <td colspan="4">No Products found.</td>
+                    <td colspan="5">No products found.</td>
                 </tr>
             <%
                 }

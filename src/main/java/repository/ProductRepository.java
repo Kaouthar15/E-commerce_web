@@ -72,6 +72,8 @@ public class ProductRepository {
                 Product product = new Product();
                 product.setId(rs.getLong("id"));
                 product.setName(rs.getString("name"));
+                product.setPhoto(null);
+                product.setPrice(rs.getDouble("price"));
                 products.add(product);
                 System.out.println("after "+product.getName()); 
             }
