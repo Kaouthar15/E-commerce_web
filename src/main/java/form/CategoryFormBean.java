@@ -1,8 +1,6 @@
 package form;
 
-import java.util.List;
 
-import model.Category;
 
 public class CategoryFormBean {
 

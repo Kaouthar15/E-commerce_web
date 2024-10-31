@@ -9,14 +9,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Category;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/categories")
 public class CategoryController extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final CategoryRepository categoryRepository = new CategoryRepository();
 
 	@Override

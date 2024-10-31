@@ -6,18 +6,12 @@ public class Product{
     private Long id;
     private String name;
     private double price;
+    private String photo;
     
 
-    // Constructors
+    // Constructor
     public Product() {}
 
-
-    public Product(String name2, double price2, model.Category byId) {
-		
-    	this.name = name2;
-        this.price = price2;
-        
-	}
 
 	// Getters and Setters
     public Long getId() {
@@ -43,5 +37,15 @@ public class Product{
     public void setPrice(double price) {
         this.price = price;
     }
+
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
 }

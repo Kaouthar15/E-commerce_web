@@ -2,10 +2,10 @@ package form;
 
 public class ProductFormBean {
 
+	private Long id;
 	private String name;
 	private double price;
-	private String categoryName;
-
+	private String photo;
 	public ProductFormBean() {
 	};
 
@@ -25,11 +25,22 @@ public class ProductFormBean {
 		this.price = price;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
 }

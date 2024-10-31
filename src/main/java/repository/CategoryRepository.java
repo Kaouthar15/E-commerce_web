@@ -5,14 +5,13 @@ import util.ConnexionDB;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import form.CategoryFormBean;
 
 public class CategoryRepository {
 
-    private final ConnexionDB connexionDB;
+    @SuppressWarnings("unused")
+	private final ConnexionDB connexionDB;
 
     public CategoryRepository() {
         this.connexionDB = new ConnexionDB();
@@ -23,7 +22,7 @@ public class CategoryRepository {
         String query = "SELECT * FROM categories";
 
         try{
-        	Connection conx = connexionDB.Connect();
+        	Connection conx = ConnexionDB.Connect();
         
              Statement stmt = conx.createStatement(); 
              ResultSet rs = stmt.executeQuery(query);
@@ -46,7 +45,7 @@ public class CategoryRepository {
     public void addCategory(String name, String description) {
 		String query="INSERT INTO categories(name,description) VALUES(?,?)";
 		try {
-			Connection conx = connexionDB.Connect(); 
+			Connection conx = ConnexionDB.Connect(); 
 			PreparedStatement ps=conx.prepareStatement(query);
 			ps.setString(1,name);
 			ps.setString(2, description); 
@@ -61,7 +60,7 @@ public class CategoryRepository {
         String query = "SELECT * FROM Categories WHERE name LIKE ?";
 
         try {
-        	Connection conx = connexionDB.Connect();
+        	Connection conx = ConnexionDB.Connect();
              PreparedStatement stmt = conx.prepareStatement(query);
 
             stmt.setString(1, "%" + name + "%");
@@ -84,7 +83,7 @@ public class CategoryRepository {
     public void save(Category category) {
         String query = "INSERT INTO Categories (name) VALUES (?)";
 
-        try {Connection conn = connexionDB.Connect();
+        try {Connection conn = ConnexionDB.Connect();
              PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, category.getName());
             stmt.executeUpdate();
@@ -97,7 +96,7 @@ public class CategoryRepository {
         String query = "DELETE FROM Categories WHERE id = ?";
 
         try {
-        	Connection conn = connexionDB.Connect();
+        	Connection conn = ConnexionDB.Connect();
              PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setLong(1, id);
             stmt.executeUpdate();
