@@ -1,7 +1,6 @@
 package model;
 
-
-public class Product{
+public class Product {
     
     private Long id;
     private String name;
@@ -9,11 +8,10 @@ public class Product{
     private String photo;
     private Category category;
 
-    // Constructor
+    // Default constructor
     public Product() {}
 
-
-	// Getters and Setters
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -38,24 +36,19 @@ public class Product{
         this.price = price;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
 
-	public String getPhoto() {
-		return photo;
-	}
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
+    public Category getCategory() {
+        return category;
+    }
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-
-	public Category getCategory() {
-		return category;
-	}
-
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

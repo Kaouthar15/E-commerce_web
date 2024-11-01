@@ -1,5 +1,6 @@
 package repository;
 
+import model.Category;
 import model.Product;
 import util.ConnexionDB;
 import java.sql.*;
@@ -15,16 +16,17 @@ public class ProductRepository {
     public ProductRepository() {
         this.connexionDB = new ConnexionDB();
     }
-
-    public List<Product> findAllProducts() { 
+    public List<Product> findAllProducts() {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM products";
+        String query = "SELECT p.id, p.name, p.price, p.photo, c.id AS category_id, c.name AS category_name "
+                     + "FROM products p JOIN categories c ON p.id_category = c.id";
 
-        try{
+        try {
+        	
         	Connection conx = ConnexionDB.Connect();
-        
-             Statement stmt = conx.createStatement(); 
+             Statement stmt = conx.createStatement();
              ResultSet rs = stmt.executeQuery(query);
+             
 
             while (rs.next()) {
                 Product product = new Product();
@@ -32,17 +34,27 @@ public class ProductRepository {
                 product.setName(rs.getString("name"));
                 product.setPrice(rs.getDouble("price"));
                 product.setPhoto(rs.getString("photo"));
+                
+                
+                Category category = new Category();
+                category.setId(rs.getLong("category_id"));
+                category.setName(rs.getString("category_name"));
+                product.setCategory(category);
+                
                 products.add(product);
             }
         } catch (SQLException e) {
-        	System.out.println("Error in findAllProducts\n"+e);
+            System.out.println("Error in findAllProducts\n" + e);
             e.printStackTrace();
         }
-        System.out.println("Size of products : "+products.size());
+        
+        System.out.println("Size of products : " + products.size());
         return products;
     }
+
  
     public void addProduct(String name, Double price ,String photo) {
+    	System.out.println("ADD  : "); 
 		String query="INSERT INTO products(name,price,photo,id_category) VALUES(?,?,?,?)";
 		try {
 			Connection conx = ConnexionDB.Connect(); 
@@ -74,7 +86,7 @@ public class ProductRepository {
                 product.setName(rs.getString("name"));
                 product.setPhoto("file");
                 product.setPrice(rs.getDouble("price"));
-                products.add(product);
+                products.add(product); 
                 System.out.println("after "+product.getName()); 
             }
            

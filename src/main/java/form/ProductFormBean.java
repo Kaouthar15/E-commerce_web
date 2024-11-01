@@ -2,54 +2,53 @@ package form;
 
 public class ProductFormBean {
 
-	private Long id;
-	private String name;
-	private double price;
-	private String photo;
-	private Long id_category;
-	public ProductFormBean() {
-	};
+    private Long id;
+    private String name;
+    private double price;
+    private String photo;
+    private Long categoryId;
 
-	public String getName() {
-		return name;
-	}
+    // Default constructor
+    public ProductFormBean() {}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPhoto() {
-		return photo;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public String getPhoto() {
+        return photo;
+    }
 
-	public Long getId_category() {
-		return id_category;
-	}
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 
-	public void setId_category(Long id_category) {
-		this.id_category = id_category;
-	}
+    public Long getCategoryId() {
+        return categoryId;
+    }
 
- 
-
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 }

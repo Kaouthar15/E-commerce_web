@@ -145,17 +145,26 @@ img {
 					<td><input type="text" name="name" required placeholder="Product name" /></td>
 					<td><input type="text" name="price" required placeholder="Product price" /></td>
 					<td>
-						<form method='post' action='uploadFile' enctype="multipart/form-data">
+<!-- 						<form method='post' action='uploadFile' enctype="multipart/form-data"> -->
 						
-							<input type="file" name="file" accept="image/*" /> <input type="submit" value="Upload" />
+<!-- 							<input type="file" name="file" accept="image/*" /> <input type="submit" value="Upload" /> -->
 							
-						</form> 
-						<c:if test="${not empty confirmation }">
-							<fmt:message key="upload.confirmation" />
-						</c:if> 
+<!-- 						</form>  -->
+<%-- 						<c:if test="${not empty confirmation }"> --%>
+<%-- 							<fmt:message key="upload.confirmation" /> --%>
+<%-- 						</c:if>  --%>
+							in progress
 					</td>
-					<td><input type="submit" class="action-btn add" value="Add"
-						name="add" /></td>
+					<td>
+						<select>
+							<option value="">Select Category</option>
+					        
+					        <c:forEach var="category" items="${categoryList}">
+					            <option value="${category.id}">${category.name}</option>
+					        </c:forEach>
+						</select>
+					</td>
+					<td><input type="submit" class="action-btn add" value="Add" name="add"/></td>
 				</tr>
 			</form>
 
