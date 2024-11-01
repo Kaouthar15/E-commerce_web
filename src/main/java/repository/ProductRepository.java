@@ -53,7 +53,7 @@ public class ProductRepository {
     }
 
  
-    public void addProduct(String name, Double price ,String photo) {
+    public void addProduct(String name, Double price ,String photo,Long idCat) {
     	System.out.println("ADD  : "); 
 		String query="INSERT INTO products(name,price,photo,id_category) VALUES(?,?,?,?)";
 		try {
@@ -62,39 +62,38 @@ public class ProductRepository {
 			ps.setString(1,name); 
 			ps.setDouble(2, price); 
 			ps.setString(3, photo); 
-			ps.setLong(4, 1);
+			ps.setLong(4, idCat);
 			ps.executeUpdate();
 			System.out.println("ADD Product"); 
 		}catch (SQLException e) {
 			System.out.println("Add Product ERROR ------>: \n"+e); 
-		}
+			}
 	}
     public List<Product> searchByName(String name) {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM products WHERE name LIKE ?";
+        String query = "SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.id_category = c.id WHERE p.name LIKE ?";
 
-        try {
-        	Connection conx = ConnexionDB.Connect();
-             PreparedStatement stmt = conx.prepareStatement(query);
-
+        try (Connection conx = ConnexionDB.Connect(); 
+             PreparedStatement stmt = conx.prepareStatement(query)) {
+             
             stmt.setString(1, "%" + name + "%");
             ResultSet rs = stmt.executeQuery();
-            System.out.println("before");
+            
             while (rs.next()) {
                 Product product = new Product();
                 product.setId(rs.getLong("id"));
                 product.setName(rs.getString("name"));
-                product.setPhoto("file");
+                product.setPhoto(rs.getString("photo")); 
                 product.setPrice(rs.getDouble("price"));
-                products.add(product); 
-                System.out.println("after "+product.getName()); 
+                product.setCategory(new Category(rs.getLong("id_category"), rs.getString("category_name")));
+                products.add(product);
             }
-           
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Log the exception for debugging purposes
         }
         return products;
     }
+
 
     public void save(Product category) {
         String query = "INSERT INTO Products (name) VALUES (?)";

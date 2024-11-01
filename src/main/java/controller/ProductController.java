@@ -34,11 +34,13 @@ public class ProductController extends HttpServlet {
 			System.out.println("add");
 			
 			Double price = Double.parseDouble(request.getParameter("price"));
+			Long idCat = Long.parseLong(request.getParameter("category"));
 			pfb.setName(request.getParameter("name"));
 			pfb.setPrice(price);
-			pfb.setPhoto(null); // This can be updated when the photo handling is ready
+			pfb.setPhoto(null); 
+			pfb.setCategoryId(idCat);
 			
-			productRepository.addProduct(pfb.getName(), pfb.getPrice(), pfb.getPhoto());
+			productRepository.addProduct(pfb.getName(), pfb.getPrice(), pfb.getPhoto(),pfb.getCategoryId());
 			response.sendRedirect("products");
 
 		} else if (request.getParameter("delete") != null) {
@@ -56,7 +58,7 @@ public class ProductController extends HttpServlet {
 			request.getRequestDispatcher("Product.jsp").forward(request, response);
 			System.out.println("Search using: " + request.getParameter("name"));
 		} else {
-			// Display all products if no specific action is requested
+			
 			List<Product> allProducts = productRepository.findAllProducts();
 			request.getSession().setAttribute("products", allProducts);
 			request.getRequestDispatcher("Product.jsp").forward(request, response);

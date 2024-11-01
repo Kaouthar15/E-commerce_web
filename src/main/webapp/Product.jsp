@@ -102,10 +102,13 @@ tr:hover {
 	background-color: #008000;
 }
 
+
 .action-btn:hover {
 	background-color: #c82333;
 }
-
+.add:hover {
+	background-color: #008000;
+}
 img {
 	width: 50px;
 	height: auto;
@@ -145,8 +148,7 @@ img {
 					<td><input type="text" name="name" required placeholder="Product name" /></td>
 					<td><input type="text" name="price" required placeholder="Product price" /></td>
 					<td>
-<!-- 						<form method='post' action='uploadFile' enctype="multipart/form-data"> -->
-						
+<!-- 						<form method='post' action='uploadFile' enctype="multipart/form-data"> -->	
 <!-- 							<input type="file" name="file" accept="image/*" /> <input type="submit" value="Upload" /> -->
 							
 <!-- 						</form>  -->
@@ -158,9 +160,8 @@ img {
 					<td>
 						<select>
 							<option value="">Select Category</option>
-					        
 					        <c:forEach var="category" items="${categoryList}">
-					            <option value="${category.id}">${category.name}</option>
+					            <option value="${category.id}" name="category">${category.name}</option>
 					        </c:forEach>
 						</select>
 					</td>

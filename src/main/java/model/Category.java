@@ -9,13 +9,21 @@ public class Category {
     
 
     // Constructors
-    public Category() {}
+    public Category(long l) {}
 
     public Category(String name) {
         this.name = name;
     }
 
-    // Getters and Setters
+    public Category(long long1, String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Category() {
+		// TODO Auto-generated constructor stub
+	}
+
+	// Getters and Setters
     public Long getId() {
         return id;
     }
