@@ -6,6 +6,7 @@ public class ProductFormBean {
 	private String name;
 	private double price;
 	private String photo;
+	private Long id_category;
 	public ProductFormBean() {
 	};
 
@@ -41,6 +42,14 @@ public class ProductFormBean {
 		this.id = id;
 	}
 
+	public Long getId_category() {
+		return id_category;
+	}
 
+	public void setId_category(Long id_category) {
+		this.id_category = id_category;
+	}
+
+ 
 
 }

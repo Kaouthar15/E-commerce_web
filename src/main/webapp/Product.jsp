@@ -2,6 +2,8 @@
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@page import="java.util.List"%>
 <%@page import="form.CategoryFormBean"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -131,27 +133,26 @@ img {
 				<th>Name</th>
 				<th>Price</th>
 				<th>Photo</th>
+				<th>Category</th>
 				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			<!-- Add New Product Form -->
-			<form method="post" action="products" class="add-product"
-				enctype="multipart/form-data">
+			<form method="post" action="products" class="add-product" enctype="multipart/form-data">
 				<tr>
 					<td></td>
-					<td><input type="text" name="name" required
-						placeholder="Product name" /></td>
-					<td><input type="text" name="price" required
-						placeholder="Product price" /></td>
+					<td><input type="text" name="name" required placeholder="Product name" /></td>
+					<td><input type="text" name="price" required placeholder="Product price" /></td>
 					<td>
-						<form method='post' action='uploadFile'
-							enctype="multipart/form-data">
-							<input type="file" name="file" accept="image/*" /> <input
-								type="submit" value="Upload" />
-						</form> <c:if test="${not empty confirmation }">
+						<form method='post' action='uploadFile' enctype="multipart/form-data">
+						
+							<input type="file" name="file" accept="image/*" /> <input type="submit" value="Upload" />
+							
+						</form> 
+						<c:if test="${not empty confirmation }">
 							<fmt:message key="upload.confirmation" />
-						</c:if>
+						</c:if> 
 					</td>
 					<td><input type="submit" class="action-btn add" value="Add"
 						name="add" /></td>
@@ -169,6 +170,7 @@ img {
 				<td><%= product.getName() %></td>
 				<td>$<%= product.getPrice() %></td>
 				<td><img src="<%= product.getPhoto() %>" alt="Product Image" /></td>
+				<td><%= product.getCategory().getName() %></td> 
 				<td>
 					<form method="post" action="products" style="display: inline;">
 						<input type="hidden" name="id" value="<%= product.getId() %>" />

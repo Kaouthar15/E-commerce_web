@@ -7,7 +7,7 @@ public class Product{
     private String name;
     private double price;
     private String photo;
-    
+    private Category category;
 
     // Constructor
     public Product() {}
@@ -46,6 +46,16 @@ public class Product{
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+
+
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }

@@ -30,7 +30,7 @@ public class UploadFile extends HttpServlet {
 	@SuppressWarnings("removal")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String uploadPath = getServletContext().getRealPath("") + "images"+ File.separator + "produit";
+		String uploadPath = getServletContext().getRealPath("") + "images"+ File.separator + "products";
 	    log("Upload Path : "+ uploadPath);
 		File uploadDir = new File(uploadPath);
 	    if (!uploadDir.exists()) {
@@ -43,7 +43,7 @@ public class UploadFile extends HttpServlet {
 	    for (Part part : request.getParts()) {
 	      part.write(uploadPath + File.separator + fileName);
 	    }
-	    
+	    System.out.println("uploading");
 	    HttpSession session=request.getSession();
 		session.setAttribute("confirmation",new Boolean(true));
 		response.sendRedirect("testUpload.jsp");
