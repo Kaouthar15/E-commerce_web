@@ -44,6 +44,7 @@
         <h1>E-commerce Web Application</h1>
         <div class="nav-links">
             <a href="categories">Categories</a>
+            <a href="CategoryJSTL.jsp">Categories- JSTL</a>
             <a href="products">Products</a>
         </div>
     </div>

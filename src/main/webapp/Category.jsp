@@ -15,7 +15,9 @@
             margin: 0;
             padding: 20px;
         }
-        
+        .add {
+        	background-color: #008000;
+        }
         h2 {
             text-align: center;
             color: #333;
