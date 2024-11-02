@@ -62,7 +62,7 @@ public class ProductRepository {
 			ps.setString(1,name); 
 			ps.setDouble(2, price); 
 			ps.setString(3, photo); 
-			ps.setLong(4, 1); 
+			ps.setLong(4, idCat);  
 			ps.executeUpdate();
 			System.out.println("ADD Product"); 
 			System.out.println(idCat);

@@ -142,7 +142,7 @@ img {
 		</thead>
 		<tbody>
 			<!-- Add New Product Form -->
-			<form method="post" action="products" class="add-product" enctype="multipart/form-data">
+			<form method="post" action="products" class="add-product"  enctype="multipart/form-data">
 				<tr>
 					<td></td>
 					<td><input type="text" name="name" required placeholder="Product name" /></td>
@@ -158,11 +158,11 @@ img {
 							in progress
 					</td>
 					<td>
-						<select>
-							<option value="">Select Category</option>
-					        <c:forEach var="category" items="${categoryList}">
-					            <option value="${category.id}" name="${category.id}">${category.name}</option>
-					        </c:forEach>
+						<select name="category">
+    						<option value="">Select Category</option>
+    							<c:forEach var="category" items="${categoryList}">
+        							<option value="${category.id}">${category.name}</option>
+    							</c:forEach>
 						</select>
 					</td>
 					<td><input type="submit" class="action-btn add" value="Add" name="add"/></td>
