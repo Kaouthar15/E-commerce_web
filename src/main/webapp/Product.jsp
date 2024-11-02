@@ -102,13 +102,14 @@ tr:hover {
 	background-color: #008000;
 }
 
-
 .action-btn:hover {
 	background-color: #c82333;
 }
+
 .add:hover {
 	background-color: #008000;
 }
+
 img {
 	width: 50px;
 	height: auto;
@@ -142,32 +143,29 @@ img {
 		</thead>
 		<tbody>
 			<!-- Add New Product Form -->
-			<form method="post" action="products" class="add-product"  enctype="multipart/form-data">
+			<!-- Add New Product Form -->
+			<form method="post" action="products" class="add-product" enctype="multipart/form-data">
 				<tr>
 					<td></td>
-					<td><input type="text" name="name" required placeholder="Product name" /></td>
-					<td><input type="text" name="price" required placeholder="Product price" /></td>
-					<td>
-<!-- 						<form method='post' action='uploadFile' enctype="multipart/form-data"> -->	
-<!-- 							<input type="file" name="file" accept="image/*" /> <input type="submit" value="Upload" /> -->
-							
-<!-- 						</form>  -->
-<%-- 						<c:if test="${not empty confirmation }"> --%>
-<%-- 							<fmt:message key="upload.confirmation" /> --%>
-<%-- 						</c:if>  --%>
-							in progress
-					</td>
-					<td>
-						<select name="category">
-    						<option value="">Select Category</option>
-    							<c:forEach var="category" items="${categoryList}">
-        							<option value="${category.id}">${category.name}</option>
-    							</c:forEach>
-						</select>
-					</td>
-					<td><input type="submit" class="action-btn add" value="Add" name="add"/></td>
+					<td><input type="text" name="name" required
+						placeholder="Product name" /></td>
+					<td><input type="text" name="price" required
+						placeholder="Product price" /></td>
+					<td><input type="file" name="file" accept="image/*" /> <c:if
+							test="${not empty confirmation}">
+							<fmt:message key="upload.confirmation" />
+						</c:if></td>
+					<td><select name="category">
+							<option value="">Select Category</option>
+							<c:forEach var="category" items="${categoryList}">
+								<option value="${category.id}">${category.name}</option>
+							</c:forEach>
+					</select></td>
+					<td><input type="submit" class="action-btn add" value="Add"
+						name="add" /></td>
 				</tr>
 			</form>
+
 
 			<% 
                 // Fetch products from session
@@ -180,7 +178,7 @@ img {
 				<td><%= product.getName() %></td>
 				<td>$<%= product.getPrice() %></td>
 				<td><img src="<%= product.getPhoto() %>" alt="Product Image" /></td>
-				<td><%= product.getCategory().getName() %></td> 
+				<td><%= product.getCategory().getName() %></td>
 				<td>
 					<form method="post" action="products" style="display: inline;">
 						<input type="hidden" name="id" value="<%= product.getId() %>" />
