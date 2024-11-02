@@ -161,7 +161,7 @@ img {
 						<select>
 							<option value="">Select Category</option>
 					        <c:forEach var="category" items="${categoryList}">
-					            <option value="${category.id}" name="category">${category.name}</option>
+					            <option value="${category.id}" name="${category.id}">${category.name}</option>
 					        </c:forEach>
 						</select>
 					</td>

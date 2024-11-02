@@ -62,9 +62,10 @@ public class ProductRepository {
 			ps.setString(1,name); 
 			ps.setDouble(2, price); 
 			ps.setString(3, photo); 
-			ps.setLong(4, idCat);
+			ps.setLong(4, 1); 
 			ps.executeUpdate();
 			System.out.println("ADD Product"); 
+			System.out.println(idCat);
 		}catch (SQLException e) {
 			System.out.println("Add Product ERROR ------>: \n"+e); 
 			}
@@ -73,8 +74,8 @@ public class ProductRepository {
         List<Product> products = new ArrayList<>();
         String query = "SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.id_category = c.id WHERE p.name LIKE ?";
 
-        try (Connection conx = ConnexionDB.Connect(); 
-             PreparedStatement stmt = conx.prepareStatement(query)) {
+        try {Connection conx = ConnexionDB.Connect(); 
+             PreparedStatement stmt = conx.prepareStatement(query);
              
             stmt.setString(1, "%" + name + "%");
             ResultSet rs = stmt.executeQuery();

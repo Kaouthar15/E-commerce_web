@@ -31,7 +31,7 @@ public class ProductController extends HttpServlet {
 		ProductFormBean pfb = new ProductFormBean();
 
 		if (request.getParameter("add") != null) {
-			System.out.println("add");
+			System.out.println("add"); 
 			
 			Double price = Double.parseDouble(request.getParameter("price"));
 			Long idCat = Long.parseLong(request.getParameter("category"));
